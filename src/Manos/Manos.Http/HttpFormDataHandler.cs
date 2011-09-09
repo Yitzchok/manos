@@ -91,9 +91,10 @@ namespace Manos.Http {
 			if (key_buffer.Length == 0)
 				throw new HttpException ("zero length key in www-form data.");
 
-			Encoding e =  entity.ContentEncoding;
-			entity.PostData.Set (HttpUtility.UrlDecode (key_buffer.ToString (), e),
-					HttpUtility.UrlDecode (value_buffer.ToString (), e));
+			//Encoding e =  entity.ContentEncoding;
+            entity.PostData.Set(Uri.UnescapeDataString(key_buffer.ToString()),
+                    Uri.UnescapeDataString(value_buffer.ToString()));
+
 
 			key_buffer.Length = 0;
 			value_buffer.Length = 0;
